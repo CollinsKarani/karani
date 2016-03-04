@@ -1,0 +1,38 @@
+a#link{
+	color: #505458;
+}
+
+a#link:hover{
+	color: #5E35B1;
+}
+
+.text-strikethru{
+	position:relative;
+	text-align:center;
+}
+
+.text-strikethru .line{
+	height:1px;
+	background-color:#5E35B1;
+	width:90%;
+	margin-left:5%;
+}
+
+.text-strikethru .text{
+	display:inline-block;
+	background-color:white;
+	padding:5px 10px;
+	font-size:16px;
+	top:-16px;
+	position:relative;
+	color:#5E35B1;
+	font-weight: 500;
+}
+
+.error-radio-msg{
+	margin-left:17%;
+}
+
+#gallery .mix{
+	display: none;
+}
