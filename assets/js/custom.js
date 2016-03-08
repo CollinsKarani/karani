@@ -50,15 +50,30 @@ $(document.body).on("click", "a[data-toggle]", function(event) {
 	location.hash = this.getAttribute("href");
 	$.ajax({
 		type: "POST",
-		url: "http://127.0.0.1/cms/setting/menu",
+		url: "http://127.0.0.1/karani/setting/menu",
 		data: { value: dummy }
 	}).done(function( msg ) {
 		alert( "Data Saved: " + msg );
 	});
+	$('#gallery').mixItUp();
+
 });
 $(window).on('popstate', function() {
 	var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
 	$('a[href=' + anchor + ']').tab('show');
+});
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+	var target = $(e.target).attr('href');
+	if (target === '.tab-content') {
+		if (!$('#gallery').mixItUp('isLoaded')) {
+			$('#gallery').mixItUp({
+				selectors: {
+					filter: '.filter'
+				}
+			});
+		}
+	}
 });
 
 

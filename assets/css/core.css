@@ -871,6 +871,7 @@ a:focus {
 .waves-block {
   display: block;
 }
+
 /* ========= */
 /* Animation */
 /* ========= */
@@ -1168,3 +1169,5 @@ a:focus {
     transform: rotate(140deg);
   }
 }
+
+

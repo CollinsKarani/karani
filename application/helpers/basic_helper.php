@@ -530,3 +530,12 @@ if ( ! function_exists('input_price'))
 		return $query;
 	}
 }
+
+if ( ! function_exists('input_file_image'))
+{
+	function input_file_image($name="",$value="",$required="", $margin="")
+	{
+		$query = "<input type='file' name='".$name."' value='".$value."' id='".$name."' style='color:#000000; $margin' data-validation='".$required." mime size' data-validation-allowing='jpg, png, jpeg' data-validation-max-size='1M' data-validation-error-msg='Field ini wajib diisi' data-validation-error-msg-mime='Field ini wajib diisi foto' data-validation-error-msg-size='Maksimal ukuran gambar adalah 1MB' accept='image/jpg,image/png,image/jpeg'>";
+		return $query;
+	}
+}

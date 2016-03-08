@@ -41,8 +41,9 @@
 								<div class="tab-pane active" id="general"> 
 									<form class="form-horizontal" role="form" method="post" action="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/save">
 										<input type="hidden" name="idCatalog" id="idCatalog" class="form-control" value="<?php echo ($getProduct) ? $getProduct[0]['idCatalog'] : "" ?>">
-										<?php echo input_text_group('skuCatalog','SKU',(@$getProduct[0]['SKU']) ? @$getProduct[0]['SKU'] : set_value('SKU'),'SKU','required') ?>
+										<?php echo input_text_group('skuCatalog','SKU',(@$getProduct[0]['skuCatalog']) ? @$getProduct[0]['skuCatalog'] : set_value('skuCatalog'),'SKU','required') ?>
 										<?php echo input_text_group('namaCatalog','Nama',(@$getProduct[0]['namaCatalog']) ? @$getProduct[0]['namaCatalog'] : set_value('namaCatalog'),'Nama Produk','required') ?>
+										<?php echo select_join_group('namaCategory','idCategory,namaCategory,kodeInduk','catalog_category','idCategory','idKategori','Kategori','',(@$getProduct[0]['idKategori']) ? @$getProduct[0]['idKategori'] : set_value('idKategori'),'','Pilih Data') ?>
 										<?php echo input_textarea_group('detailCatalog','Keterangan',(@$getProduct[0]['detailCatalog']) ? @$getProduct[0]['detailCatalog'] : set_value('detailCatalog'),'Keterangan Produk','required') ?>
 										<?php echo input_text_group('materialCatalog','Bahan',(@$getProduct[0]['materialCatalog']) ? @$getProduct[0]['materialCatalog'] : set_value('materialCatalog'),'Bahan Produk','required') ?>
 										<div class="form-group">
@@ -57,7 +58,7 @@
 												<?php echo input_price('discountCatalog',($getProduct) ? $getProduct[0]['discountCatalog'] : "",'Harga setelah diskon') ?>
 											</div>
 										</div>
-										<?php echo input_radio_group('statusCatalog','Status',array('1'=>'Aktif','2'=>'Tidak Aktif'),(@$getProduct[0]['statusCatalog']) ? @$getProduct[0]['statusCatalog'] : set_value('statusCatalog'),'required') ?>
+										<?php echo input_radio_group('statusCatalog','Status',array('Published'=>'Aktif','Not Published'=>'Tidak Aktif'),(@$getProduct[0]['statusCatalog']) ? @$getProduct[0]['statusCatalog'] : set_value('statusCatalog'),'required') ?>
 										<div class="form-group">
 											<div class="col-lg-offset-2 col-lg-10">
 												<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
@@ -147,11 +148,37 @@
 									</form>
 								</div> 
 								<div class="tab-pane" id="gallery"> 
-									<div class="filter" data-filter="all">Show All</div>
-									<div class="filter" data-filter=".category-1">Category 1</div>
-									<div class="filter" data-filter=".category-2">Category 2</div>
-
-									<div class="mix category-1" data-myorder="2">a</div>
+									<div class="row">
+										<div class="col-md-6">
+											<button type="button" class="btn btn-default waves-effect m-b-5 filter" data-filter="all">All</button>
+											<?php
+											foreach ($getProductDetail as $key => $value) 
+											{
+												$getColor = $this->model->get_where('catalog_attributes_detail',array('idCAttributesDetail'=>$value['idWarna']));
+												?>
+												<button type="button" class="btn btn-default waves-effect m-b-5 filter" data-filter=".category-2"><?php echo $getColor[0]['nameCAttributeDetail'] ?></button>
+												<?php
+											}
+											?>
+										</div>
+										<div class="col-md-6 text-right">
+											<!-- <span class="btn btn btn-primary waves-effect waves-light btn-file">
+												<form method="post" action="<?php echo base_url(getModule().'/'.getController().'/upload') ?>">
+													Unggah foto.. <input type="file" name="photoProduct">
+												</form>
+											</span> -->
+											<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+												Launch demo modal
+											</button>
+										</div>
+									</div>
+									<?php
+									foreach ($getProductGallery as $key => $value) {
+										?>
+										<div class="mix category-1" data-myorder="2"><img src="<?php echo base_url('assets/uploads/product-'.$value['idCatalog'].'-'.$value['namaCatalog'].'/'.$value['fotoCGaleri']) ?>" width="100"></div>
+										<?php
+									}
+									?>
 									<div class="mix category-2" data-myorder="4">b</div>
 									<div class="mix category-1" data-myorder="1">v</div>
 									<div class="mix category-2" data-myorder="8">d</div>
@@ -165,3 +192,30 @@
 	</div>
 </div>
 
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form method="POST" action="<?= base_url(getModule().'/'.getController().'/uploads') ?>" enctype="multipart/form-data">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Change Photo</h4>
+				</div>
+
+				<div class="modal-body">
+					<input type="hidden" name="idCatalog" id="idCatalog" class="form-control" value="<?php echo ($getProduct) ? $getProduct[0]['idCatalog'] : "" ?>">
+					<input type="hidden" name="namaCatalog" id="namaCatalog" class="form-control" value="<?php echo ($getProduct) ? $getProduct[0]['namaCatalog'] : "" ?>">
+					<?= input_file_image('fotoUser') ?>                                        
+					<i><small class="text-danger">* Upload Max Size 1MB</small></i>
+				</div>  
+
+				<div class="modal-footer">                              
+					<button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+					<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button> 
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

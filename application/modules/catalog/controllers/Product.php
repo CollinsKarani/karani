@@ -16,6 +16,7 @@ class Product extends MY_Controller {
 		$data['content'] = 'catalog_add';
 		$data['getProductDetail'] = $this->model->join('catalog_detail_stock','*',array(array('table'=>'catalog','parameter'=>'catalog_detail_stock.idCatalog=catalog.idCatalog')),array('catalog_detail_stock.idCatalog'=>$id));
 		$data['getProduct'] = $this->model->get_where('catalog',array('idCatalog'=>$id));
+		$data['getProductGallery'] = $this->model->join('catalog_galeri','*',array(array('table'=>'catalog','parameter'=>'catalog_galeri.idCatalog=catalog.idCatalog')),array('catalog_galeri.idCatalog'=>$id));
 
 		$this->load->library('RajaOngkir');
 		$provinces = $this->rajaongkir->province();
@@ -37,12 +38,12 @@ class Product extends MY_Controller {
 	{
 		$post = $this->input->post();
 		if ($post['idCatalog']) {
-			$post['updatedBy'] = $this->session->userdata('usernameMember');
+			$post['updatedBy'] = $this->session->userdata('usernameUser');
 			$post['updatedDate'] = date('Y-m-d H:i:s'); 
 			$this->model->update_data('catalog',$post,array('idCatalog'=>$post['idCatalog']));
 		}
 		else{
-			$post['createdBy'] = $this->session->userdata('usernameMember');
+			$post['createdBy'] = $this->session->userdata('usernameUser');
 			$post['createdDate'] = date('Y-m-d H:i:s'); 
 			$this->model->insert_data('catalog',$post);
 		}
@@ -55,7 +56,7 @@ class Product extends MY_Controller {
 			$data['lengthStock'] = $post['lengthStock'];
 			$data['widthStock'] = $post['widthStock'];
 			unset($post['lengthStock'],$post['widthStock']);
-			$post['updatedBy'] = $this->session->userdata('usernameMember');
+			$post['updatedBy'] = $this->session->userdata('usernameUser');
 			$post['updatedDate'] = date('Y-m-d H:i:s');
 			$this->model->update_data('catalog_detail_stock',$post,array('idStock'=>$post['idStock']));
 			$this->model->update_data('catalog_detail_stock',$data,array('idSize'=>$post['idSize']));
@@ -67,7 +68,7 @@ class Product extends MY_Controller {
 				$data['lengthStock'] = $post['lengthStock'];
 				$data['widthStock'] = $post['widthStock'];
 				$data['idWarna'] = $post['idWarna'][$i];
-				$data['createdBy'] = $this->session->userdata('usernameMember');
+				$data['createdBy'] = $this->session->userdata('usernameUser');
 				$data['createdDate'] = date('Y-m-d H:i:s'); 
 				print_r($data);
 				$this->model->insert_data('catalog_detail_stock',$data);
@@ -86,6 +87,20 @@ class Product extends MY_Controller {
 			$this->model->update_data('catalog_detail_stock',$data,array('idStock'=>$data['idStock']));
 		}
 		redirect('catalog/product/add/'.$post['idCatalog']);
+	}
+
+	public function uploads()
+	{
+		$post = $this->input->post();
+		$this->load->library('uploads');
+		$data = $this->uploads->upload_image('fotoUser','assets/uploads/product-'.$post['idCatalog'].'-'.$post['namaCatalog']);
+		$post['fotoCGaleri'] = $data['file_name'];
+		$post['createdBy'] = $this->session->userdata('usernameUser');
+		$post['createdDate'] = date('Y-m-d H:i:s'); 
+		unset($post['namaCatalog']);
+		$this->model->insert_data('catalog_galeri',$post);
+		// $this->load->library('uploads');
+		// $this->uploads->upload_image();
 	}
 
 	public function test()
