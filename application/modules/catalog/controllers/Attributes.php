@@ -18,6 +18,21 @@ class Attributes extends MY_Controller {
 		$this->load->view('main',$data,FALSE);
 	}
 
+	public function add($id="")
+	{
+		$data['idAttribute'] = $id;
+		$data['getAttributes'] = $this->model->get_where('catalog_attributes',array('idCAttribute'=>$id));
+		$data['getAttributesDetail'] = $this->model->get_where('catalog_attributes_detail',array('idCAttribute'=>$id));
+		$data['content'] = 'attribute_add';
+
+		$this->load->view('main',$data,FALSE);
+	}
+
+	public function save()
+	{
+		
+	}
+
 }
 
 /* End of file Attributes.php */

@@ -11,9 +11,9 @@
 					<div class="row"> 
 						<div class="col-lg-12"> 
 							<form class="form-horizontal" role="form" method="post" action="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/save">
-								<input type="hidden" name="idPAttribute" class="form-control" value="<?php echo ($getAttributes) ? $getAttributes[0]['idPAttribute'] : "" ?>">
-								<?php echo input_text_group('namePAttribute','Nama',(@$getAttributes[0]['namePAttribute']) ? @$getAttributes[0]['namePAttribute'] : set_value('namePAttribute'),'Nama Atribut','required') ?>
-								<?php echo select_join_multiple_group('namaMenu','idMenu,namaMenu','master_menu','idMenu','idMenu','Menu Atribut','',($getAttributes) ? $getAttributes[0]['idMenu'] : '') ?>
+								<input type="hidden" name="idCAttribute" class="form-control" value="<?php echo ($getAttributes) ? $getAttributes[0]['idCAttribute'] : "" ?>">
+								<?php echo input_text_group('nameCAttributes','Nama',(@$getAttributes[0]['nameCAttributes']) ? @$getAttributes[0]['nameCAttributes'] : set_value('namePAttribute'),'Nama Atribut','required') ?>
+								<?php echo select_join_multiple_group('namaMenu','idMenu,namaMenu','master_menu','idMenu','idMenu','Menu Atribut',"idModule=5",($getAttributes) ? $getAttributes[0]['idMenu'] : '','','','Kosongkan jika ini bukan atribut spesial') ?>
 							</div>
 							<div class="form-group">
 								<div class="col-lg-offset-2 col-lg-10">

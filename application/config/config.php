@@ -26,7 +26,7 @@ $config['sms_pass_key'] = "ikasa72ok";
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8080/karani/';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------

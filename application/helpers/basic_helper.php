@@ -255,7 +255,7 @@ if (!function_exists('input_radio_group')) {
 
 if ( ! function_exists('select_join_group'))
 {
-	function select_join_group($show="",$column="",$table="",$id="",$field="",$label="",$condition="",$params="",$required="",$placeholder="",$disabled="")
+	function select_join_group($show="",$column="",$table="",$id="",$field="",$label="",$condition="",$params="",$required="",$placeholder="",$help="",$disabled="")
 	{
 		$CI =& get_instance();
 		$CI->load->model('model','',FALSE);
@@ -284,6 +284,9 @@ if ( ! function_exists('select_join_group'))
 		}
 
 		$select .= "</select>";
+		if ($help) {
+			$select .= "<span class='help-block'><small>".$help.".</small></span>";
+		}
 		$select .= "<div class='text-danger'>".form_error($field)."</div>";
 		$select .= "</div>";
 		$select .= "</div>";
@@ -294,7 +297,7 @@ if ( ! function_exists('select_join_group'))
 
 if ( ! function_exists('select_join_multiple_group'))
 {
-	function select_join_multiple_group($show="",$column="",$table="",$id="",$field="",$label="",$condition="",$params="",$required="",$placeholder="",$disabled="")
+	function select_join_multiple_group($show="",$column="",$table="",$id="",$field="",$label="",$condition="",$params="",$required="",$placeholder="",$help="",$disabled="")
 	{
 		$CI =& get_instance();
 		$CI->load->model('model','',FALSE);
@@ -323,6 +326,9 @@ if ( ! function_exists('select_join_multiple_group'))
 		}
 
 		$select .= "</select>";
+		if ($help) {
+			$select .= "<span class='help-block'><small>".$help.".</small></span>";
+		}
 		$select .= "<div class='text-danger'>".form_error($field)."</div>";
 		$select .= "</div>";
 		$select .= "</div>";
