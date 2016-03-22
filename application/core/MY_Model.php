@@ -48,6 +48,7 @@ class MY_Model extends CI_Model {
 		{
 			$this->db->where($params);	
 		}
+		$this->db->distinct();
 		$this->db->order_by($sort,$order);
 		$this->db->limit($limit, $offset);
 		$this->db->group_by($group_by);

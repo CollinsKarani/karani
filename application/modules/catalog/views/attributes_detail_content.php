@@ -11,7 +11,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6 text-left">
-							<a href="<?php echo base_url().getModule().'/'.getController('').'/add' ?>"><button type="button" class="btn btn-default btn-primary"><i class="fa fa-plus"> </i> Tambah Data</button></a>
+							<a href="<?php echo base_url().getModule().'/'.getController('').'/add/'.$idCAttribute ?>"><button type="button" class="btn btn-default btn-primary"><i class="fa fa-plus"> </i> Tambah Data</button></a>
 						</div>
 					</div>
 					<div class="row" style="margin-top:20px;">
@@ -39,7 +39,7 @@
 											<td style="vertical-align:middle;" class="text-center"><?= $value['nameCAttributeDetail'] ?></td>
 											<td style="vertical-align:middle;" class="text-center" <?php echo ($value['valueCAttributeDetail']) ? "" : "width='5%'" ?>><?php echo ($value['valueCAttributeDetail']) ? $value['valueCAttributeDetail'] : "-" ?></td>
 											<td style="vertical-align:middle;" class="text-center">
-												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idCAttributesDetail'] ?>">
+												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idCAttribute'] ?>?u=<?php echo $value['idCAttributesDetail'] ?>">
 													<button class="btn btn-icon waves-effect waves-light btn-primary btn-xs m-b-5" data-attr="<?= $value['idCAttributesDetail'] ?>"><i class="fa fa-pencil"></i></button>
 												</a>
 												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 sa-params" data-id="<?= $value['idCAttributesDetail'] ?>"><i class="fa fa-trash"></i></button>

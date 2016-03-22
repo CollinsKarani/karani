@@ -143,6 +143,80 @@ $('.delete-user').click(function(e){
     });
 });
 
+$('.delete-category').click(function(e){
+    var parent = $(this).data("id");
+    swal({   
+        title: "Apa anda yakin untuk menghapus kategori ini?",   
+        text: "Data kategori beserta data terkait seperti produk,dll akan terhapus serta tak bisa dikembalikan",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Ya, silahkan!",   
+        cancelButtonText: "Batalkan!",   
+        closeOnConfirm: false,   
+        closeOnCancel: true,
+        showLoaderOnConfirm: true,
+    }, function() {
+        $.ajax(
+        {
+            crossOrigin: true,
+            crossDomain: true,
+            headers: {
+             "Content-type" : "application/json"
+         },
+         type: "post",
+         url: "http://localhost:8080/karani/catalog/category/delete/"+parent,
+         data: parent,
+         success: function(data){
+         }
+     })
+        .done(function(data) {
+            swal("Canceled!", 'Kategori berhasil dihapus'+data, "success");
+            window.setTimeout(function(){location.reload()},2000);
+        })
+        .error(function(data) {
+            swal("Oops", "We couldn't connect to the server!", "error");
+        });
+    });
+});
+
+$('.delete-attribute').click(function(e){
+    var parent = $(this).data("id");
+    swal({   
+        title: "Apa anda yakin untuk menghapus atribut ini?",   
+        text: "Atribut beserta data di dalamnya akan terhapus serta tak bisa dikembalikan",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Ya, silahkan!",   
+        cancelButtonText: "Batalkan!",   
+        closeOnConfirm: false,   
+        closeOnCancel: true,
+        showLoaderOnConfirm: true,
+    }, function() {
+        $.ajax(
+        {
+            crossOrigin: true,
+            crossDomain: true,
+            headers: {
+             "Content-type" : "application/json"
+         },
+         type: "post",
+         url: "http://localhost:8080/karani/catalog/attributes/delete/"+parent,
+         data: parent,
+         success: function(data){
+         }
+     })
+        .done(function(data) {
+            swal("Canceled!", 'Atribut berhasil dihapus'+data, "success");
+            window.setTimeout(function(){location.reload()},2000);
+        })
+        .error(function(data) {
+            swal("Oops", "We couldn't connect to the server!", "error");
+        });
+    });
+});
+
     //Custom Image
     $('#sa-image').click(function(){
         swal({   

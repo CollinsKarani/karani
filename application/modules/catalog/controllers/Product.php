@@ -15,6 +15,7 @@ class Product extends MY_Controller {
 	{
 		$data['content'] = 'catalog_add';
 		$data['getProductDetail'] = $this->model->join('catalog_detail_stock','*',array(array('table'=>'catalog','parameter'=>'catalog_detail_stock.idCatalog=catalog.idCatalog')),array('catalog_detail_stock.idCatalog'=>$id));
+		$data['getProductColor'] = $this->model->join('catalog_detail_stock','idWarna',array(array('table'=>'catalog','parameter'=>'catalog_detail_stock.idCatalog=catalog.idCatalog')),array('catalog_detail_stock.idCatalog'=>$id),'','');
 		$data['getProduct'] = $this->model->get_where('catalog',array('idCatalog'=>$id));
 		$data['getProductGallery'] = $this->model->join('catalog_galeri','*',array(array('table'=>'catalog','parameter'=>'catalog_galeri.idCatalog=catalog.idCatalog')),array('catalog_galeri.idCatalog'=>$id));
 

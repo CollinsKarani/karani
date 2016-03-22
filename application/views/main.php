@@ -13,9 +13,7 @@
 	<!--Core CSS -->		
 	<?php
 
-	if (isset($other_css)) {
-		echo load_css($other_css); 
-	}
+	
 	$multiple_css = array(
 		'css/bootstrap.min.css', 
 		'css/core.css',
@@ -27,6 +25,7 @@
 		'plugins/sweetalert/dist/sweetalert.css'
 		);
 	echo load_css($multiple_css); 
+
 	echo load_css('css/custom.css');
 	echo load_css('plugins/datatables/jquery.dataTables.min.css');
 	echo load_css('font-awesome/css/font-awesome.css');
@@ -37,6 +36,9 @@
 	echo load_css('plugins/bs-select/select2.bootstrap.css');
 	echo load_css('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css');
 	echo load_css('plugins/modal-effect/css/component.css');
+	if (isset($other_css)) {
+		echo load_css($other_css); 
+	}
 
 	?>
 
@@ -92,9 +94,11 @@
 	echo load_js('plugins/sweetalert/dist/sweetalert.min.js');
 	echo load_js('plugins/sweetalert/dist/sweet-alert.init.js');
 	echo load_js('plugins/mixitup-master/src/jquery.mixitup.js');
+	if (isset($other_js)) {
+		echo load_js($other_js); 
+	}
 
 	?>
-
 
 	<footer class="footer" style="text-align:right !important;">2016 © ExporaDev Team</footer>
 	

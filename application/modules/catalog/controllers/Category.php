@@ -39,6 +39,23 @@ class Category extends MY_Controller {
 		redirect('catalog/category');
 	}
 
+	public function delete($id)
+	{
+		// $getModule = $this->model->get_where('master_module',array('idModule'=>$id));
+		// $deleteModule = $this->model->delete_data('master_module',array('idModule'=>$id));
+		// echo deleteDir('application/modules/'.strtolower($getModule[0]['nameModule']));
+		$post['idKategori'] = 0;
+		$this->model->update_data('catalog',$post,array('idKategori'=>$id));
+		$this->model->delete_data('catalog_category',array('kodeInduk'=>$id));
+		$this->model->delete_data('catalog_category',array('idCategory'=>$id));
+		// $getProduct = $this->model->get_where('catalog',array('idKategori'=>$id));
+		// foreach ($getProduct as $key => $value) {
+		// 	$getComment = $this->model->get_where('catalog_comment',array('idCatalog'=>$value['idCatalog']));
+		// 	print_r($getComment);
+		// }
+		// print_r($getCategory);
+		// print_r($getProduct);
+	}
 }
 
 /* End of file Category.php */

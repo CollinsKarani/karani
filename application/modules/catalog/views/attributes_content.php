@@ -38,13 +38,13 @@
 											<td style="vertical-align:middle;" class="text-center"><?php echo $no++ ?></td>
 											<td style="vertical-align:middle;" ><?php echo $value['nameCAttributes'] ?></td>
 											<td style="vertical-align:middle;" class="text-center">
-												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/detail?u=<?php echo $value['idCAttribute'] ?>">
+												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/detail/<?php echo $value['idCAttribute'] ?>">
 													<button class="btn btn-icon waves-effect waves-light btn-info btn-xs m-b-5" data-attr="<?= $value['idCAttribute'] ?>"><i class="fa fa-eye"></i></button>
 												</a>
 												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idCAttribute'] ?>">
 													<button class="btn btn-icon waves-effect waves-light btn-primary btn-xs m-b-5" data-attr="<?= $value['idCAttribute'] ?>"><i class="fa fa-pencil"></i></button>
 												</a>
-												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 delete-user" data-id="<?= $value['idCAttribute'] ?>"><i class="fa fa-trash"></i></button>
+												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 delete-attribute" data-id="<?= $value['idCAttribute'] ?>"><i class="fa fa-trash"></i></button>
 											</td>
 										</tr>
 										<?php 

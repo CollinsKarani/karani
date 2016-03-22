@@ -155,6 +155,40 @@ $("#delete_row_menu").click(function(){
 	}
 });   
 
+$("#prov-origin").change(function(){
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:8080/karani/order/ajax_content/getCityOrigin/"+$('#prov-origin').val()+"",
+		success: function(response){
+			$('#city-origin').html(response);
+			$(".search-select").select2({
+				placeholder : 'Pilih Data...',
+				minimumResultsForSearch: 10,
+				allowClear: true,
+			});
+		},
+		dataType: "html"
+	});
+	return false;
+});       
+
+$("#prov-destination").change(function(){
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:8080/karani/order/ajax_content/getCityDestination/"+$('#prov-destination').val()+"",
+		success: function(response){
+			$('#city-destination').html(response);
+			$(".search-select").select2({
+				placeholder : 'Pilih Data...',
+				minimumResultsForSearch: 10,
+				allowClear: true,
+			});
+		},
+		dataType: "html"
+	});
+	return false;
+});   
+
 
 
 });

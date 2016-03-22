@@ -120,7 +120,7 @@ if ( ! function_exists('select_join'))
 			$query = $CI->model->get($table,$column);
 		}		
 
-		$select = "<select class='form-control search-select' '".$required."' data-placeholder='".$placeholder."' name='".$field."' id='".$field."' style='color:black;width:100%;' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' $disabled>";
+		$select  = "<select class='form-control search-select' '".$required."' data-placeholder='".$placeholder."' name='".$field."' id='".$field."' style='color:black;width:100%;' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' $disabled>";
 		$select .= "<option></option>";
 		foreach ($query as $key => $value) {
 			// $select .="<option value=''>No Select</option>";

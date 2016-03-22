@@ -58,7 +58,7 @@
 												<?php echo input_price('discountCatalog',($getProduct) ? $getProduct[0]['discountCatalog'] : "",'Harga setelah diskon') ?>
 											</div>
 										</div>
-										<?php echo input_radio_group('statusCatalog','Status',array('Published'=>'Aktif','Not Published'=>'Tidak Aktif'),(@$getProduct[0]['statusCatalog']) ? @$getProduct[0]['statusCatalog'] : set_value('statusCatalog'),'required') ?>
+										<?php echo select_join_group('nameCAttributeDetail','idCAttributesDetail,nameCAttributeDetail,valueCAttributeDetail','catalog_attributes_detail','idCAttributesDetail','statusCatalog','Status',array('idCAttribute'=>7),(@$getProduct[0]['statusCatalog']) ? @$getProduct[0]['statusCatalog'] : set_value('statusCatalog'),'','Pilih Data') ?>
 										<div class="form-group">
 											<div class="col-lg-offset-2 col-lg-10">
 												<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
@@ -113,7 +113,7 @@
 								<div class="tab-pane" id="quantity"> 
 									<form class="form-horizontal" role="form" method="post" action="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/save_quantity">
 										<div class="form-group">
-											<div class="col-sm-1">
+											<div class="col-sm-1"
 												<h4>Jumlah</h4>
 											</div>
 											<div class="col-sm-5">
@@ -152,11 +152,11 @@
 										<div class="col-md-6">
 											<button type="button" class="btn btn-default waves-effect m-b-5 filter" data-filter="all">All</button>
 											<?php
-											foreach ($getProductDetail as $key => $value) 
+											foreach ($getProductColor as $key => $value) 
 											{
 												$getColor = $this->model->get_where('catalog_attributes_detail',array('idCAttributesDetail'=>$value['idWarna']));
 												?>
-												<button type="button" class="btn btn-default waves-effect m-b-5 filter" data-filter=".category-2"><?php echo $getColor[0]['nameCAttributeDetail'] ?></button>
+												<button type="button" class="btn btn-default waves-effect m-b-5 filter" data-filter=".<?php echo $getColor[0]['idCAttributesDetail'] ?>"><?php echo $getColor[0]['nameCAttributeDetail'] ?></button>
 												<?php
 											}
 											?>
@@ -168,20 +168,17 @@
 												</form>
 											</span> -->
 											<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-												Launch demo modal
+												Tambahkan gambar baru..
 											</button>
 										</div>
 									</div>
 									<?php
 									foreach ($getProductGallery as $key => $value) {
 										?>
-										<div class="mix category-1" data-myorder="2"><img src="<?php echo base_url('assets/uploads/product-'.$value['idCatalog'].'-'.$value['namaCatalog'].'/'.$value['fotoCGaleri']) ?>" width="100"></div>
+										<div class="mix <?php echo $value['idCAttributeDetail'] ?>"><img src="<?php echo base_url('assets/uploads/product-'.$value['idCatalog'].'-'.$value['namaCatalog'].'/'.$value['fotoCGaleri']) ?>" width="100"></div>
 										<?php
 									}
 									?>
-									<div class="mix category-2" data-myorder="4">b</div>
-									<div class="mix category-1" data-myorder="1">v</div>
-									<div class="mix category-2" data-myorder="8">d</div>
 								</div> 
 							</div>  
 						</div>
@@ -206,7 +203,12 @@
 				<div class="modal-body">
 					<input type="hidden" name="idCatalog" id="idCatalog" class="form-control" value="<?php echo ($getProduct) ? $getProduct[0]['idCatalog'] : "" ?>">
 					<input type="hidden" name="namaCatalog" id="namaCatalog" class="form-control" value="<?php echo ($getProduct) ? $getProduct[0]['namaCatalog'] : "" ?>">
-					<?= input_file_image('fotoUser') ?>                                        
+					<div class="form-group">
+					<?php echo select_join('nameCAttributeDetail','idCAttributesDetail,nameCAttributeDetail,valueCAttributeDetail','catalog_attributes_detail','idCAttributesDetail','idCAttributeDetail',array('idCAttribute'=>6),'','required'); ?>
+					</div>
+					<div class="form-group">
+						<?= input_file_image('fotoUser') ?>       
+					</div>                                 
 					<i><small class="text-danger">* Upload Max Size 1MB</small></i>
 				</div>  
 

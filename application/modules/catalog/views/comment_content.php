@@ -24,7 +24,8 @@
 								<thead>
 									<tr>
 										<th class="text-center">No</th>
-										<th class="text-center">Nama Kategori</th>
+										<th class="text-center">Produk</th>
+										<th class="text-center">Komentar</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
@@ -36,12 +37,13 @@
 										?>
 										<tr class="gradeU">
 											<td style="vertical-align:middle;" class="text-center"><?php echo $no++ ?></td>
-											<td style="vertical-align:middle;" ><?php echo $value['namaCategory'] ?></td>
+											<td style="vertical-align:middle"><?php echo $value['idCatalog'] ?></td>
+											<td style="vertical-align:middle;" ><?php echo $value['isiCComment'] ?></td>
 											<td style="vertical-align:middle;" class="text-center">
-												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idCategory'] ?>">
-													<button class="btn btn-icon waves-effect waves-light btn-primary btn-xs m-b-5" data-attr="<?= $value['idCategory'] ?>"><i class="fa fa-pencil"></i></button>
+												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idCComment'] ?>">
+													<button class="btn btn-icon waves-effect waves-light btn-primary btn-xs m-b-5" data-attr="<?= $value['idCComment'] ?>"><i class="fa fa-pencil"></i></button>
 												</a>
-												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 delete-category" data-id="<?= $value['idCategory'] ?>"><i class="fa fa-trash"></i></button>
+												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 delete-user" data-id="<?= $value['idCComment'] ?>"><i class="fa fa-trash"></i></button>
 											</td>
 										</tr>
 										<?php 
