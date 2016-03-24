@@ -11,7 +11,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6 text-left">
-							<a href="<?php echo base_url().getModule().'/'.getController('').'/add/'.$idCAttribute ?>"><button type="button" class="btn btn-default btn-primary"><i class="fa fa-plus"> </i> Tambah Data</button></a>
+							<a href="<?php echo base_url().getModule().'/'.getController('').'/add/'.$idCAttribute ?>?u=0"><button type="button" class="btn btn-default btn-primary"><i class="fa fa-plus"> </i> Tambah Data</button></a>
 						</div>
 					</div>
 					<div class="row" style="margin-top:20px;">

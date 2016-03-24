@@ -139,6 +139,38 @@ if ( ! function_exists('select_join'))
 	}
 }
 
+if ( ! function_exists('select_join_multiple_group'))
+{
+	function select_join_multiple($show="",$column="",$table="",$id="",$field="",$condition="",$params="",$required="",$placeholder="",$disabled="")
+	{
+		$CI =& get_instance();
+		$CI->load->model('model','',FALSE);
+		if (!empty($condition)) {
+			$query = $CI->model->get($table,$column,$condition);
+		}
+		else{
+			$query = $CI->model->get($table,$column);
+		}		
+
+		$select  = "<select class='form-control search-select' '".$required."' data-placeholder='".$placeholder."' name='".$field."' id='".$field."' style='color:black;width:100%;' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' $disabled multiple>";
+		$select .= "<option></option>";
+		foreach ($query as $key => $value) {
+			// $select .="<option value=''>No Select</option>";
+			if($value[$id]==$params)
+			{
+				$select .= "<option value='".$value[$id]."' selected>".$value[$show]."</option>";
+			}
+			else {
+				$select .= "<option value='".$value[$id]."'>".$value[$show]."</option>";
+
+			}
+		}
+
+		$select .= "</select>";
+		return $select;
+	}
+}
+
 if (!function_exists('input_text_group')) {
 	function input_text_group($name="",$label="",$value="",$placeholder="",$required="",$attr = array(),$help=""){
 		$CI =& get_instance();
@@ -154,6 +186,31 @@ if (!function_exists('input_text_group')) {
 		$query .= "<label for='".$name."' class='col-lg-2 col-sm-2 control-label'>".$label."</label>";
 		$query .= "<div class='col-sm-6'>";
 		$query .= "<input type='text' name='".$name."' id=".$name." class='form-control' placeholder='".$placeholder."' value='".$value."' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' '".$attribute."'>";
+		if ($help) {
+			$query .= "<span class='help-block'><small>".$help.".</small></span>";
+		}
+		$query .= "<div class='text-danger'>".form_error($name)."</div>";
+		$query .= "</div>";
+		$query .= "</div>";
+		return $query;
+	}
+}
+
+if (!function_exists('input_price_group')) {
+	function input_price_group($name="",$label="",$value="",$placeholder="",$required="",$attr = array(),$help=""){
+		$CI =& get_instance();
+		$attribute = ' ';
+		if(!empty($attr) OR is_array($attr))
+		{
+			foreach($attr as $key => $attrs)
+			{
+				$attribute .= ' '.$key.'="'.$attrs.'"';
+			}
+		}
+		$query  = "<div class='form-group'>";
+		$query .= "<label for='".$name."' class='col-lg-2 col-sm-2 control-label'>".$label."</label>";
+		$query .= "<div class='col-sm-6'>";
+		$query .= "<input type='text' name='".$name."' id=".$name." class='form-control' placeholder='".$placeholder."' value='".$value."' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' '".$attribute."' onkeyup='number(this)'>";
 		if ($help) {
 			$query .= "<span class='help-block'><small>".$help.".</small></span>";
 		}
@@ -182,6 +239,15 @@ if (!function_exists('input_textarea_group')) {
 		$query .= "<div class='text-danger'>".form_error($name)."</div>";
 		$query .= "</div>";
 		$query .= "</div>";
+		return $query;
+	}
+}
+
+if ( ! function_exists('input_daterange'))
+{
+	function input_daterange($name="",$value="",$placeholder="",$required="")
+	{
+		$query = "<input type='text' name='".$name."' value='".$value."' class='form-control date-picker' id='".$name."' placeholder='".$placeholder."' style='color:#000000;' onkeyup='nominal(this)' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini'>";
 		return $query;
 	}
 }
@@ -272,7 +338,7 @@ if ( ! function_exists('select_join_group'))
 		$select .= "<select class='form-control search-select' '".$required."' data-placeholder='".$placeholder."' name='".$field."' id='".$field."' style='color:black;width:100%;' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' $disabled>";
 		$select .= "<option></option>";
 		foreach ($query as $key => $value) {
-			// $select .="<option value=''>No Select</option>";
+// $select .="<option value=''>No Select</option>";
 			if($value[$id]==$params)
 			{
 				$select .= "<option value='".$value[$id]."' selected>".$value[$show]."</option>";
@@ -314,7 +380,7 @@ if ( ! function_exists('select_join_multiple_group'))
 		$select .= "<select class='form-control search-select' '".$required."' data-placeholder='".$placeholder."' name='".$field."' id='".$field."' style='color:black;width:100%;' data-validation='".$required."' data-validation-error-msg='Anda belum mengisi field ini' $disabled multiple>";
 		$select .= "<option></option>";
 		foreach ($query as $key => $value) {
-			// $select .="<option value=''>No Select</option>";
+// $select .="<option value=''>No Select</option>";
 			if($value[$id]==$params)
 			{
 				$select .= "<option value='".$value[$id]."' selected>".$value[$show]."</option>";
@@ -420,8 +486,8 @@ function getMenu($field,$params="",$params2=""){
 	empty($params) ? $params = getFunction() : $params = $params;
 	empty($params2) ? $params2 = "" : $params2 = "/".$params2;
 
-	// $kodeInduk =  $CI->model->get_where('master_menu',array('namaMenu'=>getController()));
-	// $result = $CI->model->get_where('master_menu',array('kodeInduk'=>$kodeInduk[0]['idMenu'],'namaMenu'=>getFunction()));
+// $kodeInduk =  $CI->model->get_where('master_menu',array('namaMenu'=>getController()));
+// $result = $CI->model->get_where('master_menu',array('kodeInduk'=>$kodeInduk[0]['idMenu'],'namaMenu'=>getFunction()));
 
 	$result = $CI->model->get_where('master_menu',array('targetMenu'=>getModule()."/".getController()."/".$params.$params2));
 
@@ -436,8 +502,8 @@ function getCategory($field,$params=""){
 
 	$CI =& get_instance();
 
-	// $kodeInduk =  $CI->model->get_where('master_menu',array('namaMenu'=>getController()));
-	// $result = $CI->model->get_where('master_menu',array('kodeInduk'=>$kodeInduk[0]['idMenu'],'namaMenu'=>getFunction()));
+// $kodeInduk =  $CI->model->get_where('master_menu',array('namaMenu'=>getController()));
+// $result = $CI->model->get_where('master_menu',array('kodeInduk'=>$kodeInduk[0]['idMenu'],'namaMenu'=>getFunction()));
 
 	$result = $CI->model->get_where('master_category',array('idMenu'=>$params));
 

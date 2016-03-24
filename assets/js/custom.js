@@ -1,5 +1,7 @@
+var base_url = window.location.origin;
 var resizefunc = [];
 function number(objek) {
+	separator = ".";
 	a = objek.value;
 	b = a.replace(/[^\d]/g,"");
 	c = "";
@@ -8,7 +10,7 @@ function number(objek) {
 	for (i = panjang; i > 0; i--) {
 		j = j + 1;
 		if (((j % 3) == 1) && (j != 1)) {
-			c = b.substr(i-1,1) + c;
+			c = b.substr(i-1,1) + separator + c;
 		} else {
 			c = b.substr(i-1,1) + c;
 		}
@@ -141,6 +143,30 @@ $('#chkAll').click(function (e) {
 
 });
 
+$(".datepicker").datepicker();
+  $(".datepicker").on("changeDate", function () {
+    $(this).datepicker('hide');
+  });
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  var checkin = $('#startDate').datepicker({
+    onRender: function(date) {
+    }
+  }).on('changeDate', function(ev) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate());
+    checkout.setValue(newDate);
+    checkin.hide();
+    $('#expiredDate')[0].focus();
+  }).data('datepicker');
+  var checkout = $('#expiredDate').datepicker({
+    onRender: function(date) {
+      return date.valueOf() < checkin.date.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function(ev) {
+    checkout.hide();
+  }).data('datepicker');
+
 var i=1;
 $("#add_row_menu").click(function(){
 	$('#addr'+i).html("<td class='text-center'>"+ (i+1) +"</td><input type='hidden' name='idPAttributeDetail[]' value=''><td><input name='namePAttributeDetail[]' type='text' class='form-control input-md' style='color:#000;' placeholder='Isi Atribut'/></td>");
@@ -158,7 +184,7 @@ $("#delete_row_menu").click(function(){
 $("#prov-origin").change(function(){
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8080/karani/order/ajax_content/getCityOrigin/"+$('#prov-origin').val()+"",
+		url: base_url+"/karani/order/ajax_content/getCityOrigin/"+$('#prov-origin').val()+"",
 		success: function(response){
 			$('#city-origin').html(response);
 			$(".search-select").select2({
@@ -175,7 +201,7 @@ $("#prov-origin").change(function(){
 $("#prov-destination").change(function(){
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8080/karani/order/ajax_content/getCityDestination/"+$('#prov-destination').val()+"",
+		url: base_url+"/karani/order/ajax_content/getCityDestination/"+$('#prov-destination').val()+"",
 		success: function(response){
 			$('#city-destination').html(response);
 			$(".search-select").select2({

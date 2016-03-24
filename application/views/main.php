@@ -36,6 +36,7 @@
 	echo load_css('plugins/bs-select/select2.bootstrap.css');
 	echo load_css('plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css');
 	echo load_css('plugins/modal-effect/css/component.css');
+	echo load_css('plugins/bootstrap-datepicker/css/datepicker.css');
 	if (isset($other_css)) {
 		echo load_css($other_css); 
 	}
@@ -94,6 +95,7 @@
 	echo load_js('plugins/sweetalert/dist/sweetalert.min.js');
 	echo load_js('plugins/sweetalert/dist/sweet-alert.init.js');
 	echo load_js('plugins/mixitup-master/src/jquery.mixitup.js');
+	echo load_js('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js');
 	if (isset($other_js)) {
 		echo load_js($other_js); 
 	}

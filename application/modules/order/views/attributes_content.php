@@ -24,7 +24,7 @@
 								<thead>
 									<tr>
 										<th class="text-center">No</th>
-										<th class="text-center">Nama Kategori</th>
+										<th class="text-center">Nama Atribut</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
@@ -36,12 +36,15 @@
 										?>
 										<tr class="gradeU">
 											<td style="vertical-align:middle;" class="text-center"><?php echo $no++ ?></td>
-											<td style="vertical-align:middle;" ><?php echo $value['namaCategory'] ?></td>
+											<td style="vertical-align:middle;" ><?php echo $value['nameOAttributes'] ?></td>
 											<td style="vertical-align:middle;" class="text-center">
-												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idCategory'] ?>">
-													<button class="btn btn-icon waves-effect waves-light btn-primary btn-xs m-b-5" data-attr="<?= $value['idCategory'] ?>"><i class="fa fa-pencil"></i></button>
+												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/detail/<?php echo $value['idOAttribute'] ?>">
+													<button class="btn btn-icon waves-effect waves-light btn-info btn-xs m-b-5" data-attr="<?= $value['idOAttribute'] ?>"><i class="fa fa-eye"></i></button>
 												</a>
-												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 delete-category" data-module="<?= getModule() ?>" data-controller="<?= getController() ?>" data-id="<?= $value['idCategory'] ?>"><i class="fa fa-trash"></i></button>
+												<a href="<?php echo base_url() ?>index.php/<?php echo getModule() ?>/<?php echo getController() ?>/add/<?php echo $value['idOAttribute'] ?>">
+													<button class="btn btn-icon waves-effect waves-light btn-primary btn-xs m-b-5" data-attr="<?= $value['idOAttribute'] ?>"><i class="fa fa-pencil"></i></button>
+												</a>
+												<button class="btn btn-icon waves-effect waves-light btn-danger btn-xs m-b-5 delete-attribute" data-id="<?= $value['idOAttribute'] ?>"><i class="fa fa-trash"></i></button>
 											</td>
 										</tr>
 										<?php 

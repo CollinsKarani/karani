@@ -16,6 +16,15 @@ class Category extends MY_Controller {
 		$this->load->view('main',$data,FALSE);
 	}
 
+	public function detail($id="")
+	{
+		$get = $this->input->get();
+		$data['idCategory'] = $id;
+		$data['data'] = $this->model->get_where('catalog_category',array('kodeInduk'=>$id));
+		$data['content'] = 'category_detail_content';
+		$this->load->view('main',$data,FALSE);
+	}
+
 	public function add($id="")
 	{
 		$data['content'] = 'category_add';

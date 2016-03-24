@@ -19,6 +19,7 @@
 									<label for='' class='col-lg-2 col-sm-2 control-label'>Provinsi</label>
 									<div class="col-md-6">
 										<select name='provOrigin' id='prov-origin' required class='form-control search-select'>
+											<option></option>
 											<?php
 											foreach ($getProvince as $key => $value) {
 												echo "<option value='".$value['province_id']."'>".$value['province']."</option>";
@@ -32,7 +33,6 @@
 									<div class="col-md-6">
 										<select name='cityOrigin' id='city-origin' required class='form-control search-select'>
 											<option></option>
-
 										</select>
 									</div>
 								</div>
@@ -41,6 +41,7 @@
 									<label for='' class='col-lg-2 col-sm-2 control-label'>Provinsi</label>
 									<div class="col-md-6">
 										<select name='provDestination' id='prov-destination' required class='form-control search-select' data-placeholder='Pilih data...'>
+											<option></option>
 											<?php
 											foreach ($getProvince as $key => $value) {
 												echo "<option value='".$value['province_id']."'>".$value['province']."</option>";

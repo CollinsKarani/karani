@@ -12,6 +12,46 @@
 					$query = $this->model->join('user','*',array(array('table'=>'privilege_user','parameter'=>'user.roleUser=privilege_user.idRole'),array('table'=>'master_menu','parameter'=>'privilege_user.menuPrivilege=master_menu.idMenu')),"idRole='1' and actionPrivilege='lihat' and namaMenu in('".getController()."','".getFunction()."')");
 					?>
 
+					<!--Widget-4 -->
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-lg-3">
+							<div class="mini-stat clearfix bx-shadow">
+								<span class="mini-stat-icon bg-info"><i class="fa fa-usd"></i></span>
+								<div class="mini-stat-info text-right text-muted">
+									<span class="counter"><?php echo count($data) ?></span>
+									Produk Tersedia
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-3">
+							<div class="mini-stat clearfix bx-shadow">
+								<span class="mini-stat-icon bg-warning"><i class="fa fa-shopping-cart"></i></span>
+								<div class="mini-stat-info text-right text-muted">
+									<span class="counter">SKU</span>
+									Produk Terlaris
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-3">
+							<div class="mini-stat clearfix bx-shadow">
+								<span class="mini-stat-icon bg-pink"><i class="fa fa-user"></i></span>
+								<div class="mini-stat-info text-right text-muted">
+									<span class="counter">5210</span>
+									Stok Habis
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-lg-3">
+							<div class="mini-stat clearfix bx-shadow">
+								<span class="mini-stat-icon bg-success"><i class="fa fa-eye"></i></span>
+								<div class="mini-stat-info text-right text-muted">
+									<span class="counter">SKU</span>
+									Dilihat Terbanyak
+								</div>
+							</div>
+						</div>
+					</div> <!-- End row-->
+
 					<div class="row">
 						<div class="col-md-6 text-left">
 							<a href="<?php echo base_url().getModule().'/'.getController('').'/add' ?>"><button type="button" class="btn btn-default btn-primary"><i class="fa fa-plus"> </i> Tambah Data</button></a>

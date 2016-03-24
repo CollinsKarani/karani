@@ -24,10 +24,8 @@ class Attributes extends MY_Controller {
 		$get = $this->input->get();
 		$data['idCAttribute'] = $id;
 		$data['getAttributes'] = $this->model->get_where('catalog_attributes',array('idCAttribute'=>$id));
-		if ($id) {
-			if (isset($get['u'])) {
-				$data['getAttributesDetail'] = $this->model->get_where('catalog_attributes_detail',array('idCAttributesDetail'=>$get['u']),'orderCAttributeDetail','desc');
-			}
+		if (isset($get['u'])) {
+			$data['getAttributesDetail'] = $this->model->get_where('catalog_attributes_detail',array('idCAttributesDetail'=>$get['u']),'orderCAttributeDetail','desc');
 			$data['content'] = 'attribute_detail_add';
 		} else{
 			$data['content'] = 'attribute_add';

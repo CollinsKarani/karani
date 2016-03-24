@@ -9,6 +9,7 @@
 !function($) {
     "use strict";
 
+    var base_url = window.location.origin;
     var SweetAlert = function() {};
 
     //examples 
@@ -145,6 +146,8 @@ $('.delete-user').click(function(e){
 
 $('.delete-category').click(function(e){
     var parent = $(this).data("id");
+    var module = $(this).data("module");
+    var controller = $(this).data("controller");
     swal({   
         title: "Apa anda yakin untuk menghapus kategori ini?",   
         text: "Data kategori beserta data terkait seperti produk,dll akan terhapus serta tak bisa dikembalikan",   
@@ -165,13 +168,52 @@ $('.delete-category').click(function(e){
              "Content-type" : "application/json"
          },
          type: "post",
-         url: "http://localhost:8080/karani/catalog/category/delete/"+parent,
+         url: base_url+"/karani/"+module+"/"+controller+"/delete/"+parent,
          data: parent,
          success: function(data){
          }
      })
         .done(function(data) {
             swal("Canceled!", 'Kategori berhasil dihapus'+data, "success");
+            window.setTimeout(function(){location.reload()},2000);
+        })
+        .error(function(data) {
+            swal("Oops", "We couldn't connect to the server!", "error");
+        });
+    });
+});
+
+$('.delete').click(function(e){
+    var parent = $(this).data("id");
+    var module = $(this).data("module");
+    var controller = $(this).data("controller");
+    swal({   
+        title: "Apa anda yakin untuk menghapus kategori ini?",   
+        text: "Data beserta data terkait akan terhapus serta tak bisa dikembalikan",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Ya, silahkan!",   
+        cancelButtonText: "Batalkan!",   
+        closeOnConfirm: false,   
+        closeOnCancel: true,
+        showLoaderOnConfirm: true,
+    }, function() {
+        $.ajax(
+        {
+            crossOrigin: true,
+            crossDomain: true,
+            headers: {
+             "Content-type" : "application/json"
+         },
+         type: "post",
+         url: base_url+"/karani/"+module+"/"+controller+"/delete/"+parent,
+         data: parent,
+         success: function(data){
+         }
+     })
+        .done(function(data) {
+            swal("Canceled!", 'Data berhasil dihapus', "success");
             window.setTimeout(function(){location.reload()},2000);
         })
         .error(function(data) {
@@ -202,7 +244,7 @@ $('.delete-attribute').click(function(e){
              "Content-type" : "application/json"
          },
          type: "post",
-         url: "http://localhost:8080/karani/catalog/attributes/delete/"+parent,
+         url: base_url+"/karani/catalog/attributes/delete/"+parent,
          data: parent,
          success: function(data){
          }

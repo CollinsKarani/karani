@@ -1219,19 +1219,18 @@ div.dataTables_info {
 }
 .mini-stat-info {
   padding-top: 2px;
-  color: #eeeeee;
 }
 .mini-stat-info span {
-  color: #ffffff;
+  color: #555;
   display: block;
   font-size: 24px;
   font-weight: 600;
 }
 .mini-stat-info span.name {
-  color: #ffffff;
   display: block;
   font-size: 18px;
   font-weight: 600;
+  color: #777;
   margin-top: 5px;
 }
 .inbox-widget .inbox-item {
